@@ -1,15 +1,17 @@
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const request = require('request');
+const env = require('./environment.js');
 
-const base_lol_url = "http://ddragon.leagueoflegends.com/cdn/12.11.1/"
-const lol_url = base_lol_url + "data/en_US/champion.json";
-const image_url = "img/champion/";
+const base_lol_url = env.base_lol_url;
+const lol_url = env.base_lol_url + env.champion_json_url;
+const image_url = env.image_url;
+const file_path = env.file_path;
 
 let championInfo = [];
 
 function writeChampionInfoToCSV() {
   const csvWriter = createCsvWriter({
-    path: process.cwd() + "/results/lolChampions.csv",
+    path: process.cwd() + file_path,
     header: [
       { id: 'name', title: 'NAME' },
       { id: 'blurb', title: 'BLURB' },
