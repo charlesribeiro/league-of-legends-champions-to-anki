@@ -14,6 +14,7 @@ function writeChampionInfoToCSV() {
     path: process.cwd() + file_path,
     header: [
       { id: 'name', title: 'NAME' },
+      { id: 'title', title: 'TITLE' },
       { id: 'blurb', title: 'BLURB' },
       { id: 'id', title: 'ID' },
       { id: 'attack', title: 'ATTACK' },
@@ -36,7 +37,7 @@ function writeChampionInfoToCSV() {
 
 function processSingleChampionData(champion) {
   const { attack, defense, difficulty, magic } = champion.info;
-  const { blurb , id, name, partype, tags, key } = champion;
+  const { blurb , id, name, partype, tags, key, title} = champion;
   const image = base_lol_url + image_url + champion.image.full;
   const { 
     hp,
@@ -62,7 +63,7 @@ function processSingleChampionData(champion) {
   } = champion.stats;
 
   championInfo.push({
-    name, blurb, id, attack, defense, difficulty, magic, partype, tags, image, attackrange, key
+    name, title, blurb, id, attack, defense, difficulty, magic, partype, tags, image, attackrange, key
   });
   if (key == 143) {
     writeChampionInfoToCSV();
