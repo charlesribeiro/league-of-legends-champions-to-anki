@@ -23,32 +23,47 @@ function writeChampionInfoToCSV() {
       { id: 'partype', title: 'PARTYPE' },
       { id: 'tags', title: 'TAGS' },
       { id: 'image', title: 'IMAGE' },
+      { id: 'attackrange', title: 'ATTACK_RANGE' },
       { id: 'key', title: 'KEY' },
     ]
   });
 
   csvWriter.writeRecords(championInfo)
     .then(() => {
-      console.log('...Done');
+      console.log('...done writing csv');
     });
 }
 
 function processSingleChampionData(champion) {
-  const blurb = champion.blurb;
-  const id = champion.id;
   const { attack, defense, difficulty, magic } = champion.info;
-  const name = champion.name;
-  const partype = champion.partype;
-  const tags = champion.tags;
-  const key = champion.key;
+  const { blurb , id, name, partype, tags, key } = champion;
   const image = base_lol_url + image_url + champion.image.full;
+  const { 
+    hp,
+    hpperlevel,
+    mp,
+    mpperlevel,
+    movespeed,
+    armor,
+    armorperlevel,
+    spellblock,
+    spellblockperlevel,
+    attackrange,
+    hpregen,
+    hpregenperlevel,
+    mpregen,
+    mpregenperlevel, 
+    crit,
+    critperlevel,
+    attackdamage,
+    attackdamageperlevel,
+    attackspeedoffset,
+    attackspeedperlevel,
+  } = champion.stats;
 
   championInfo.push({
-    name, blurb, id, attack, defense, difficulty, magic, partype, tags, image, key
+    name, blurb, id, attack, defense, difficulty, magic, partype, tags, image, attackrange, key
   });
-
-  console.log(key);
-
   if (key == 143) {
     writeChampionInfoToCSV();
   }
